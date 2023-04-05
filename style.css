@@ -1,0 +1,29 @@
+#wrapper {
+    background-size: cover;
+}
+
+#btn-start-exam-fullscreen {
+    z-index: 1031; /* show on top of navbar */
+}
+
+#clock {
+    font-size: 20rem;
+}
+
+#clock-minutes-and-seconds {
+    position: relative;
+}
+
+#clock-seconds {
+    font-size: 4rem;
+    position: absolute;
+    bottom: 2rem;
+}
+
+.clock-subtitle {
+    font-size: 4rem;
+}
+
+.clock-subtitle-sm {
+    font-size: 3rem;
+}
