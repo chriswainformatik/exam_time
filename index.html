@@ -6,20 +6,55 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <!-- loading screen -->
+        <div id="loading-overlay" class="vw-100 vh-100 bg-secondary d-flex align-items-center justify-content-center">
+            <div class="load-wrapp">
+                <div class="load-3">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+
+        
+
         <div id="wrapper" class="vw-100 vh-100">
+
             <div id="inner-wrapper" class="w-100 h-100 bg-dark bg-opacity-50 d-flex align-items-center justify-content-center">
                 <div id="clock-wrapper" class="d-flex flex-column">
                     <div id="" class="d-flex justify-content-center">
-                        <button id="btn-start-exam-fullscreen" class="btn btn-success">Starten</button>
+                        <button id="btn-start-exam-fullscreen" class="btn btn-success d-none btn-start-exam">Starten</button>
                     </div>
-                    <div id="clock" class="text-white lh-1 d-flex justify-content-center">
-                        <div class="row d-flex align-items-baseline">
-                            <span id="clock-hours" class="col"></span><span class="col">:</span><div id="clock-minutes-and-seconds" class="col"><span id="clock-minutes" class=""></span><span id="clock-seconds" class=""></span></div>
+                    <div class="mt-4 fs-4 text-white d-flex justify-content-center d-none" id="remaining-time-caption">
+                        Verbleibend:
+                    </div>
+                    <div id="clock" class="d-flex justify-content-center text-white lh-1">
+                        <div id="clock-inner" class="d-flex">
+                            <div id="clock-hours" class=""></div>
+
+                            <div id="clock-seperator" class="">:</div>
+                            
+                            <div id="clock-minutes-and-seconds" class="d-flex align-items-baseline">
+                                <div id="clock-minutes" class=""></div>
+                                <div id="clock-seconds" class="text-white"></div>
+                            </div>
+                            
                         </div>
                     </div>
-                    <div id="end-time" class="clock-subtitle text-white d-flex justify-content-evenly">Ende: <span id="end-time-value"> --:--</span></div>
+                    <div id="end-time" class="row d-flex justify-content-center">
+                        <div id="" class="col-6 clock-subtitle text-white row d-flex justify-content-center">
+                            <span class="col">Ende:</span><span id="end-time-value" class="col">--:--</span>
+                        </div>
+                    </div>
+                    <!--
                     <div id="remaining-time" class="clock-subtitle text-white d-flex justify-content-evenly d-none">Verbleibend: <span id="remaining-time-value"></span></div>
-                    <div id="total-time" class="clock-subtitle-sm text-white d-flex justify-content-evenly d-none">Gesamt: <span id="total-time-value"></span></div>
+                    -->
+                    <div id="total-time" class="row d-flex justify-content-center">
+                        <div class="col-6 clock-subtitle-sm text-white row d-flex justify-content-center">
+                            <span class="col">Gesamt:</span><span id="total-time-value" class="col">-- min</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -33,36 +68,60 @@
               <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                   <h4 class="offcanvas-title" id="offcanvasNavbarLabel">Einstellungen</h4>
-                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" id="btn-sidebar-close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <h5 class="mb-4">Zeiten</h5>
+                    <!--
+                    <div class="mb-4">
+                        <select class="form-select" aria-label="Default select example">
+                            <option value="total" selected>Gesamtzeit festlegen</option>
+                            <option value="end">Endzeitpunkt festlegen</option>
+                        </select>
+                    </div>
+                    -->
+                    <!--
                     <div class="mb-4">
                         <label for="input-end-time" class="form-label">Endzeitpunkt</label>
                         <input type="time" class="form-control" id="input-end-time" placeholder="">
                         <div id="error-msg-time-not-set" class="invalid-feedback">Entweder Endzeitpunkt oder eine Gesamtzeit festlegen!</div>
                     </div>
-                    <div class="mb-4">
-                        <label for="input-total-time" class="form-label">Gesamtzeit in min</label>
-                        <input type="text" class="form-control" id="input-total-time" placeholder="">
-                        <div id="error-msg-time-not-set" class="invalid-feedback">Entweder Endzeitpunkt oder eine Gesamtzeit festlegen!</div>
+                    -->
+                    <label for="input-total-time" class="form-label">Gesamtzeit in min</label>
+                    <div class="row row-cols-lg-auto d-flex me-1">
+                        <div class="flex-grow-1">
+                            <input type="text" class="form-control" id="input-total-time" placeholder="">
+                        </div>
+                        <button id="btn-save-settings" class="btn btn-primary btn-save">Speichern</button>
                     </div>
+
+                    <div id="error-msg-time-not-set" class="invalid-feedback">Gesamtzeit wurde nicht festgelegt!</div>
+                    <!--<div id="error-msg-time-not-saved" class="invalid-feedback">Wert wurde noch nicht gespeichert!</div>-->
+
                     <h5 class="mb-4 mt-2">Anzeige</h5>
                     <div class="mb-4">
-                        <select class="form-select" aria-label="Default select example">
-                            <option value="end" selected>Ende anzeigen</option>
-                            <option value="remaining">Verbleibend anzeigen</option>
+                        <select class="form-select" aria-label="Default select example" id="select-time-or-remaining">
+                            <option value="time" selected>Uhrzeit anzeigen</option>
+                            <option value="remaining" id="select-remaining" disabled>Verbleibend anzeigen</option>
                         </select>
                     </div>
                     <div class="form-check mb-4">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox-show-total-time">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-show-end-time" checked>
+                        <label class="form-check-label" for="checkbox-show-end-time">
+                            Endezeit anzeigen
+                        </label>
+                    </div>
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" value="" id="checkbox-show-total-time" checked>
                         <label class="form-check-label" for="checkbox-show-total-time">
                             Gesamtzeit anzeigen
                         </label>
                     </div>
                     <div class="mb-4 d-flex justify-content-between">
-                        <button id="btn-save-settings" class="btn btn-primary">Speichern</button>
-                        <button id="btn-start-exam-sidebar" class="btn btn-success">Starten</button>
+                        <button id="btn-start-exam-sidebar" class="btn btn-success btn-start-exam">Starten</button>
+                    </div>
+                    <div class="mb-4 text-secondary d-none" id="info-restart">
+                        Seite neu laden zum neu Starten.
                     </div>
                 </div>
               </div>
