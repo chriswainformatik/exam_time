@@ -1,4 +1,5 @@
 var examStarted = false;
+var examEnded = false;
 var endTimeGlobal = undefined;
 var showRemaining = false; // show clock if set to false
 
@@ -26,17 +27,24 @@ function positionSeconds() {
 
 function updateTime() {
     var date = new Date();
-    if (showRemaining) {
-        var minutesRemaining = (endTimeGlobal.getMinutes() - date.getMinutes());
-        var hoursRemaining = (endTimeGlobal.getHours() - date.getHours());
-        var secondsRemaining = (endTimeGlobal.getSeconds() - date.getSeconds());
-        if (secondsRemaining < 0) {
-            secondsRemaining += 60;
-            minutesRemaining -= 1;
-        }
-        if (minutesRemaining < 0) {
-            minutesRemaining += 60;
-            hoursRemaining -= 1;
+    if (showRemaining && !examEnded) {
+        var hoursRemaining = 0;
+        var minutesRemaining = 0;
+        var secondsRemaining = 0;
+        if (endTimeGlobal > date) {
+            minutesRemaining = (endTimeGlobal.getMinutes() - date.getMinutes());
+            hoursRemaining = (endTimeGlobal.getHours() - date.getHours());
+            secondsRemaining = (endTimeGlobal.getSeconds() - date.getSeconds());
+            if (secondsRemaining < 0) {
+                secondsRemaining += 60;
+                minutesRemaining -= 1;
+            }
+            if (minutesRemaining < 0) {
+                minutesRemaining += 60;
+                hoursRemaining -= 1;
+            }
+        } else {
+            examEnded = true;
         }
         document.getElementById('clock-hours').innerHTML = hoursRemaining.toString().padStart(2, '0');
         document.getElementById('clock-minutes').innerHTML = minutesRemaining.toString().padStart(2, '0');
