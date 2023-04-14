@@ -37,6 +37,13 @@
 }
 
 
+#additional-time-wrapper {
+  position: fixed;
+  top: 0.5rem;
+  left: 1rem;
+}
+
+
 /** Loading animation **/
 #loading-overlay {
     position: absolute;

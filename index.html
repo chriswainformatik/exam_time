@@ -21,6 +21,10 @@
 
         <div id="wrapper" class="vw-100 vh-100">
 
+            <div class="col text-white" id="additional-time-wrapper">
+
+            </div>
+
             <div id="inner-wrapper" class="w-100 h-100 bg-dark bg-opacity-50 d-flex align-items-center justify-content-center">
                 <div id="clock-wrapper" class="d-flex flex-column">
                     <div id="" class="d-flex justify-content-center">
@@ -117,8 +121,21 @@
                             Gesamtzeit anzeigen
                         </label>
                     </div>
-                    <div class="mb-4 d-flex justify-content-between">
+                    <div class="mb-4">
                         <button id="btn-start-exam-sidebar" class="btn btn-success btn-start-exam">Starten</button>
+                    </div>
+                    <div class="mb-4">
+                        <button id="btn-add-additional-time" class="btn btn-secondary" disabled="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill mb-1" viewBox="0 0 16 16"><!-- remove mb-1 class once vertical align is ficed -->
+                                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                                </svg>
+                             Zeitverlängerung 
+                        </button>
+                        <div class="text-secondary text-sm" id="error-msg-time-not-set-2">Gesamtzeit wurde noch nicht festgelegt!</div>
+                    </div>
+                    <div class="mb-4 d-none" id="additional-time-input-wrapper">
+
                     </div>
                     <div class="mb-4 text-secondary d-none" id="info-restart">
                         Seite neu laden zum neu Starten.
